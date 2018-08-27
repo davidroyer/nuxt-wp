@@ -4,14 +4,6 @@ export const state = () => ({
   siteData: {},
   testValue: 'Initial',
   menu: {},
-  navLinks: [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Articles', path: '/articles' },
-    { name: 'Examples', path: '/examples' },
-    { name: 'Contact', path: '/contact' }
-  ],
   post: {}
 })
 

@@ -65,10 +65,6 @@ export default {
   }),
 
   computed: {
-    navLinksArray() {
-      return this.$store.state.navLinks
-    },
-
     menuItems() {
       return this.$store.getters.menuItems
     },
