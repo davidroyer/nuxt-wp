@@ -1,7 +1,7 @@
 const path = require('path')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
-const config = require('./website.config')
+const config = require('./website.config.js')
 const axios = require('axios')
 
 class TailwindExtractor {
@@ -212,8 +212,8 @@ module.exports = {
     // interval: 1000,
     routes() {
       return Promise.all([
-        axios.get(`http://admin.theartinmotion.com/wp-json/wp/v2/posts?per_page=10`),
-        axios.get(`http://admin.theartinmotion.com/wp-json/wp/v2/pages?per_page=10`)
+        axios.get(`${config.wpApiUrl}/wp-json/wp/v2/posts?per_page=100`),
+        axios.get(`${config.wpApiUrl}/wp-json/wp/v2/pages?per_page=100`)
       ]).then(data => {
         const posts = data[0]
         const pages = data[1]

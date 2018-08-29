@@ -105,7 +105,7 @@ export default {
     handleSlug(menuItem) {
       const { url } = menuItem
       const siteUrl = `${this.$store.state.siteData.home}/`
-      if (url === this.$store.state.siteData.home) return '/'
+      if (url === this.$store.state.siteData.url) return '/'
       else return url.replace(siteUrl, '/')
     },
 
