@@ -1,8 +1,12 @@
-import WpApi from '~/lib/WpApi.js'
-const wpApiUrl = 'http://nuxt-wp.dev'
+import wpApi from '@/services/wpApi.js'
+const apiBaseUrl = 'http://nuxt-wp.dev'
 
+/**
+ * Set `$wp` on the `app` instance
+ * This way we can use it in middleware and pages `asyncData`/`fetch`
+ */
 export default ({ app }, inject) => {
-  // Set `$wp` instance on `app`
-  // This way we can use it in middleware and pages `asyncData`/`fetch`
-  app.$wp = new WpApi(`${wpApiUrl}`)
+  const wp = new wpApi(`${apiBaseUrl}`)
+  app.$wp = wp
+  inject('wp', wp)
 }

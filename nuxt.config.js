@@ -220,7 +220,7 @@ module.exports = {
         return posts.data
           .map(post => {
             return {
-              route: '/articles/' + post.slug,
+              route: '/blog/' + post.slug,
               payload: post
             }
           })
