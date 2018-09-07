@@ -1,45 +1,59 @@
 import axios from 'axios'
-const menuApiPath = 'menus/v1/menus/top'
+const menuApiPath = 'menus/v1/menus'
 
 class WpApi {
   constructor(siteurl) {
     this.apiBase = `${siteurl}/wp-json`
     this.menuItemsUrl = `${this.apiBase}/${menuApiPath}`
+    this.options = {
+      params: {
+        page: 1,
+        per_page: 10
+      }
+    }
   }
 
-  async menu() {
-    const { data } = await axios.get(`${this.apiBase}/${menuApiPath}`)
-    return { menu: data }
+  async menu(menuSlug) {
+    const { data } = await axios.get(`${this.apiBase}/${menuApiPath}/${menuSlug}`)
+    return data
   }
 
   async post(slug) {
     const { data } = await axios.get(`${this.apiBase}/wp/v2/posts/?slug=${slug}`)
-    return { post: data[0] }
+    return data[0]
   }
 
   async page(slug) {
     const { data } = await axios.get(`${this.apiBase}/wp/v2/pages/?slug=${slug}`)
-    return { page: data[0] }
+    return data[0]
+  }
+
+  async customPost(postType, slug) {
+    const { data } = await axios.get(
+      `${this.apiBase}/wp/v2/${postType}/?slug=${slug}`,
+      this.options
+    )
+    return data[0]
   }
 
   async posts() {
-    const { data } = await axios.get(`${this.apiBase}/wp/v2/posts`, {
-      params: {
-        page: 1,
-        per_page: 10
-      }
-    })
-    return { posts: data }
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/posts`, this.options)
+    return data
   }
 
   async pages() {
-    const { data } = await axios.get(`${this.apiBase}/wp/v2/pages`, {
-      params: {
-        page: 1,
-        per_page: 10
-      }
-    })
-    return { pages: data }
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/pages`, this.options)
+    return data
+  }
+
+  async customPosts(postType) {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/${postType}`, this.options)
+    return data
+  }
+
+  async postTypes() {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/types`, this.options)
+    return data
   }
 
   fullSiteData() {

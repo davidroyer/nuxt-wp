@@ -13,7 +13,7 @@
 <script>
 export default {
   async asyncData({ app, store, params }) {
-    const { posts } = await app.$wp.posts()
+    const posts = await app.$wp.posts()
     return {
       posts
     }

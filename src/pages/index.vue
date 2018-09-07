@@ -16,18 +16,27 @@
         <h3><nuxt-link :to="`/blog/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
       </div>
     </div>
+
+    <div class="posts mt-8">
+      <h2>Post Types</h2>
+      <div class="page" v-for="(postType, key) in postTypes" :key="key">
+        <h3><nuxt-link :to="`/post-types/${postType.rest_base}`" v-html="postType.name"></nuxt-link></h3>
+      </div>
+    </div>
   </v-wrapper>
 </template>
 
 <script>
 export default {
   async asyncData({ app }) {
-    const { posts } = await app.$wp.posts()
-    const { pages } = await app.$wp.pages()
+    const posts = await app.$wp.posts()
+    const pages = await app.$wp.pages()
+    const postTypes = await app.$wp.postTypes()
 
     return {
       pages,
-      posts
+      posts,
+      postTypes
     }
   },
   head() {

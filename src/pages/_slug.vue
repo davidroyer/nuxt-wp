@@ -14,7 +14,7 @@ export default {
   async asyncData({ app, params, payload }) {
     if (payload) return { page: payload }
     else {
-      let { page } = await app.$wp.page(params.slug)
+      let page = await app.$wp.page(params.slug)
       return { page }
     }
   },
