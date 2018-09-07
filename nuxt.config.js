@@ -30,9 +30,13 @@ module.exports = {
   srcDir: './src',
   buildDir: './build',
 
+  /*
+   ** Environmental variables
+   */
   env: {
     apiBaseUrl: isProduction ? config.productionApiUrl : config.devApiUrl
   },
+
   /*
    ** Headers of the page
    */
