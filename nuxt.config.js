@@ -3,8 +3,8 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const config = require('./website.config.js')
 const axios = require('axios')
-const devUrl = 'http://nuxt-wp.dev'
-const productionUrl = 'https://www.wpapi.app'
+const devApiUrl = 'http://nuxt-wp.dev'
+const productionApiUrl = 'https://www.wpapi.app'
 const isProduction = process.env.PRODUCTION_BUILD === 'true' ? true : false
 
 class TailwindExtractor {
@@ -33,7 +33,7 @@ module.exports = {
   buildDir: './build',
 
   env: {
-    apiBaseUrl: isProduction ? productionUrl : devUrl
+    apiBaseUrl: isProduction ? productionApiUrl : devApiUrl
   },
   /*
    ** Headers of the page
@@ -218,8 +218,8 @@ module.exports = {
     // interval: 1000,
     routes() {
       return Promise.all([
-        axios.get(`${config.wpApiUrl}/wp-json/wp/v2/posts?per_page=100`),
-        axios.get(`${config.wpApiUrl}/wp-json/wp/v2/pages?per_page=100`)
+        axios.get(`${config.productionApiUrl}/wp-json/wp/v2/posts?per_page=100`),
+        axios.get(`${config.productionApiUrl}/wp-json/wp/v2/pages?per_page=100`)
       ]).then(data => {
         const posts = data[0]
         const pages = data[1]
