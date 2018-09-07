@@ -1,5 +1,5 @@
 import wpApi from '@/services/wpApi.js'
-const apiBaseUrl = 'http://nuxt-wp.dev'
+const apiBaseUrl = process.env.apiBaseUrl
 
 /**
  * Set `$wp` on the `app` instance

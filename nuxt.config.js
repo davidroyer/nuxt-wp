@@ -3,6 +3,9 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const config = require('./website.config.js')
 const axios = require('axios')
+const devUrl = 'http://nuxt-wp.dev'
+const productionUrl = 'https://www.wpapi.app'
+const isProduction = process.env.NODE_ENV === 'production' ? true : false
 
 class TailwindExtractor {
   static extract(content) {
@@ -29,6 +32,9 @@ module.exports = {
   srcDir: './src',
   buildDir: './build',
 
+  env: {
+    apiBaseUrl: isProduction ? productionUrl : devUrl
+  },
   /*
    ** Headers of the page
    */
