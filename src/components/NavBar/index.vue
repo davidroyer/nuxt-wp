@@ -15,6 +15,7 @@
         :aria-expanded="mobileMenuIsActive ? 'true' : 'false'">
       </button>
 
+      <nuxt-link to="/projects">Projects</nuxt-link>
       <template v-if="isMobile">
         <transition name="scale">
           <nav id="nav-mobile" v-show="mobileMenuIsActive" class="nav">

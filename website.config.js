@@ -5,7 +5,7 @@ module.exports = {
   analyticsID: 'UA-56060335-6',
   siteTitle: 'Nuxt WP Starter - David Royer', // Navigation and Site Title
   shortName: 'D.Royer', // Alternative Site title for SEO
-  devApiUrl: 'http://nuxt-wp.dev',
+  devApiUrl: 'http://demo.wpapi.dev',
   productionApiUrl: 'https://www.wpapi.app',
   siteUrl: 'https://nuxt-wp.netlify.com', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element

@@ -15,7 +15,8 @@ export default {
   async asyncData({ app, params, payload }) {
     if (payload) return { posts: payload }
     else {
-      let posts = await app.$wp.customPosts(params.rest_base)
+      let postType = params.rest_base
+      let posts = await app.$wp.posts(postType)
       return {
         posts
       }

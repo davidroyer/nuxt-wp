@@ -29,11 +29,15 @@
 <script>
 export default {
   async asyncData({ app }) {
+    const menus = await app.$wp.menus()
     const posts = await app.$wp.posts()
     const pages = await app.$wp.pages()
     const postTypes = await app.$wp.postTypes()
+    const projects = await app.$wp.posts('projects')
 
     return {
+      menus,
+      projects,
       pages,
       posts,
       postTypes
