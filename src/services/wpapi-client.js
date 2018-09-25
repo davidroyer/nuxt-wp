@@ -1,10 +1,9 @@
 import axios from 'axios'
-const menuApiPath = 'menus/v1/menus'
 
 class WpApi {
-  constructor(siteurl) {
-    this.apiBase = `${siteurl}/wp-json`
-    this.menuItemsUrl = `${this.apiBase}/${menuApiPath}`
+  constructor(siteId) {
+    this.siteId = siteId
+    this.apiBase = `https://${this.siteId}.wpapi.app/wp-json`
     this.options = {
       params: {
         page: 1,

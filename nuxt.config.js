@@ -94,6 +94,10 @@ module.exports = {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://nuxt-wp.dev/wp-content/plugins/gutenberg/build/block-library/style.css'
       }
     ],
     bodyAttrs: {

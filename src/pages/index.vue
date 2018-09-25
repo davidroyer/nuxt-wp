@@ -35,10 +35,10 @@ export default {
     const postTypes = await app.$wp.postTypes()
     const projects = await app.$wp.posts('projects')
 
-    const menuTest = await app.$wp.menu('main')
+    const mainMenu = await app.$wp.menu('main')
     return {
       menus,
-      menuTest,
+      mainMenu,
       projects,
       pages,
       posts,
