@@ -4,15 +4,14 @@
       Listing of pages and blog posts
     </v-intro>
 
-    <div class="pages">
+    <div class="pages mt-8">
       <h2>Pages</h2>
       <div class="page" v-for="(page, index) in pages" :key="index">
         <h3><nuxt-link :to="`/${page.slug}`" v-html="page.title.rendered"></nuxt-link></h3>
       </div>
     </div>
 
-
-    <div class="menus">
+    <div class="menus mt-8">
       <h2>Menus</h2>
       <div class="page" v-for="(menu, index) in menus" :key="index">
         <h3><nuxt-link :to="`/${menu.slug}`" v-html="menu.name"></nuxt-link></h3>
