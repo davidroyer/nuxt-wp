@@ -33,12 +33,12 @@
       </div>
     </div>
 
-    <!-- <div class="posts mt-8">
+    <div class="posts mt-8">
       <h2>Categories</h2>
       <div class="page" v-for="(category, key) in categories" :key="key">
         <h3><nuxt-link :to="`/${category.slug}`" v-html="category.name"></nuxt-link></h3>
       </div>
-    </div> -->
+    </div>
 
     <div class="posts mt-8">
       <h2>Taxonomies</h2>
