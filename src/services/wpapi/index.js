@@ -28,11 +28,20 @@ export default class WpApi {
         return data
       }
 
-      this[singleName] = async slug => {
-        const { data } = await this.axios.get(
-          `${this.options.namespace}/${collectionName}/?slug=${slug}`
-        )
-        return data[0]
+      if (singleName === 'menu') {
+        this[singleName] = async slug => {
+          const { data } = await this.axios.get(
+            `${this.options.namespace}/${collectionName}/${slug}`
+          )
+          return data
+        }
+      } else {
+        this[singleName] = async slug => {
+          const { data } = await this.axios.get(
+            `${this.options.namespace}/${collectionName}/?slug=${slug}`
+          )
+          return data[0]
+        }
       }
     })
   }
@@ -93,7 +102,7 @@ export default class WpApi {
   }
 
   async siteData() {
-    const { data } = await this.axios.get(this.options.namespace)
+    const { data } = await this.axios.get(this.options.endpoint)
     const { name, description, url, home, gmt_offset, timezone_string } = data
     return { name, description, url, home, gmt_offset, timezone_string }
   }

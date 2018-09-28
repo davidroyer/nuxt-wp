@@ -7,7 +7,7 @@
         <h3><nuxt-link :to="`/articles/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
       </div>
     </div>
-    <pre>{{category}}</pre>    
+    <pre>{{category}}</pre>
   </v-wrapper>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   head() {
     return {
-      title: 'Category'
+      title: this.category.name
     }
   }
 }

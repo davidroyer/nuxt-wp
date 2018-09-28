@@ -51,7 +51,7 @@
 <script>
 export default {
   async asyncData({ app }) {
-    console.log(app.$wp)
+    // console.log(app.$wp)
     const menus = await app.$wp.menus()
     const posts = await app.$wp.posts()
     const pages = await app.$wp.pages()
@@ -62,7 +62,7 @@ export default {
     const postTypes = await app.$wp.postTypes()
     const projects = await app.$wp.posts('projects')
 
-    const mainMenu = await app.$wp.menu('main')
+    const mainMenu = await app.$wp.menu('main-navigation')
     return {
       menus,
       users,
