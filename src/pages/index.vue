@@ -33,12 +33,12 @@
       </div>
     </div>
 
-    <div class="posts mt-8">
+    <!-- <div class="posts mt-8">
       <h2>Categories</h2>
       <div class="page" v-for="(category, key) in categories" :key="key">
         <h3><nuxt-link :to="`/${category.slug}`" v-html="category.name"></nuxt-link></h3>
       </div>
-    </div>
+    </div> -->
 
     <div class="posts mt-8">
       <h2>Taxonomies</h2>
@@ -52,10 +52,13 @@
 <script>
 export default {
   async asyncData({ app }) {
+    console.log(app.$wp)
     const menus = await app.$wp.menus()
     const posts = await app.$wp.posts()
     const pages = await app.$wp.pages()
     const categories = await app.$wp.categories()
+    const users = await app.$wp.users()
+    const comments = await app.$wp.comments()
     const taxonomies = await app.$wp.taxonomies()
     const postTypes = await app.$wp.postTypes()
     const projects = await app.$wp.posts('projects')
@@ -63,6 +66,8 @@ export default {
     const mainMenu = await app.$wp.menu('main')
     return {
       menus,
+      users,
+      comments,
       taxonomies,
       categories,
       mainMenu,
