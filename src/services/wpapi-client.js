@@ -12,13 +12,22 @@ class WpApi {
     }
   }
 
+  async categories() {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/categories`, this.options)
+  }
+
+  async category(slug) {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/categories/?slug=${slug}`)
+    return data[0]
+  }
+
   async menus() {
     const { data } = await axios.get(`${this.apiBase}/wp/v2/menus`)
     return data
   }
 
-  async menu(menuSlug) {
-    const { data } = await axios.get(`${this.apiBase}/wp/v2/menus/${menuSlug}`)
+  async menu(slug) {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/menus/${slug}`)
     return data
   }
 
@@ -50,23 +59,25 @@ class WpApi {
     return data
   }
 
-  fullSiteData() {
-    return axios
-      .get(this.apiBase)
-      .then(json => {
-        return { fullSiteData: json.data }
-      })
-      .catch(e => ({ error: e }))
+  async taxonomies() {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/taxonomies`, this.options)
+    return data
   }
 
-  siteData() {
-    return axios
-      .get(this.apiBase)
-      .then(json => {
-        const { name, description, url, home, gmt_offset, timezone_string } = json.data
-        return { siteData: { name, description, url, home, gmt_offset, timezone_string } }
-      })
-      .catch(e => ({ error: e }))
+  async taxonomy(slug) {
+    const { data } = await axios.get(`${this.apiBase}/wp/v2/taxonomies/?slug=${slug}`)
+    return data[0]
+  }
+
+  async allSiteData() {
+    const { data } = await axios.get(this.apiBase)
+    return data
+  }
+
+  async siteData() {
+    const { data } = await axios.get(this.apiBase)
+    const { name, description, url, home, gmt_offset, timezone_string } = data
+    return { name, description, url, home, gmt_offset, timezone_string }
   }
 }
 
