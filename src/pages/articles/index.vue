@@ -4,7 +4,7 @@
     </v-intro>
     <div class="posts">
       <div class="post" v-for="(post, index) in posts" :key="index">
-        <h3><nuxt-link :to="`/blog/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
+        <h3><nuxt-link :to="`/articles/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
       </div>
     </div>
   </v-wrapper>

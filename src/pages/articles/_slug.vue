@@ -14,6 +14,7 @@ export default {
   async asyncData({ app, params, payload }) {
     if (payload) return { article: payload }
     else {
+      console.log('PARAMS.SLUG: ', params.slug)
       let article = await app.$wp.post(params.slug)
       return {
         article

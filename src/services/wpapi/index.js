@@ -69,8 +69,16 @@ export default class WpApi {
     return data
   }
 
+  async getPosts(postType = 'posts', options) {
+    const params = {
+      ...options
+    }
+    const { data } = await this.axios.get(`${this.options.namespace}/${postType}`, { params })
+    return data
+  }
+
   async post(slug, postType = 'posts') {
-    const { data } = await this.axios.get(`${this.options.namespace}/${postType}/?slug=${slug}`)
+    const { data } = await this.axios.get(`${this.options.namespace}/${postType}`)
     return data[0]
   }
 

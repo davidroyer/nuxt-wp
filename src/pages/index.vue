@@ -21,7 +21,7 @@
     <div class="posts mt-8">
       <h2>Blog Posts</h2>
       <div class="page" v-for="(post, index) in posts" :key="index">
-        <h3><nuxt-link :to="`/blog/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
+        <h3><nuxt-link :to="`/articles/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
     <div class="posts mt-8">
       <h2>Categories</h2>
       <div class="page" v-for="(category, key) in categories" :key="key">
-        <h3><nuxt-link :to="`/${category.slug}`" v-html="category.name"></nuxt-link></h3>
+        <h3><nuxt-link :to="`/categories/${category.slug}`" v-html="category.name"></nuxt-link></h3>
       </div>
     </div>
 
