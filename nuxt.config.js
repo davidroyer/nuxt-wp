@@ -232,7 +232,7 @@ module.exports = {
         return posts.data
           .map(post => {
             return {
-              route: '/blog/' + post.slug,
+              route: '/articles/' + post.slug,
               payload: post
             }
           })
