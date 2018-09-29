@@ -1,8 +1,8 @@
 <template>
   <v-wrapper>
-    <template v-if="article">
-      <h1 v-html="article.title.rendered"></h1>
-      <main class="content" v-html="article.content.rendered">
+    <template v-if="project">
+      <h1 v-html="project.title.rendered"></h1>
+      <main class="content" v-html="project.content.rendered">
       </main>
     </template>
 
@@ -12,18 +12,18 @@
 <script>
 export default {
   async asyncData({ app, params, payload }) {
-    if (payload) return { article: payload }
+    if (payload) return { project: payload }
     else {
-      let article = await app.$wp.project(params.slug)
+      let project = await app.$wp.project(params.slug)
       return {
-        article
+        project
       }
     }
   },
 
   head() {
     return {
-      title: this.article.title.rendered
+      title: this.project.title.rendered
     }
   }
 }
