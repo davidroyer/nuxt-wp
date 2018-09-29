@@ -42,7 +42,7 @@
     <div class="posts mt-8">
       <h2>Categories</h2>
       <div class="page" v-for="(category, key) in categories" :key="key">
-        <h3><nuxt-link :to="`/categories/${category.slug}`" v-html="category.name"></nuxt-link></h3>
+        <h3><nuxt-link :to="`/blog/categories/${category.slug}`" v-html="category.name"></nuxt-link></h3>
       </div>
     </div>
 
