@@ -7,9 +7,7 @@ const apiBaseUrl = process.env.apiBaseUrl
  */
 export default ({ app }, inject) => {
   const wp = new WpApi({
-    siteUrl: apiBaseUrl,
-    endpoint: `${apiBaseUrl}/wp-json`,
-    siteId: 'demo1'
+    wpSiteUrl: apiBaseUrl
   })
   app.$wp = wp
   inject('wp', wp)

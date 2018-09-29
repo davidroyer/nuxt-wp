@@ -14,7 +14,7 @@ export default {
   async asyncData({ app, params, payload }) {
     if (payload) return { article: payload }
     else {
-      let article = await app.$wp.post(params.slug, 'projects')
+      let article = await app.$wp.project(params.slug)
       return {
         article
       }

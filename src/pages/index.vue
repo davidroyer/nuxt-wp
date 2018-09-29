@@ -11,6 +11,13 @@
       </div>
     </div>
 
+    <div class="pages mt-8" v-if="projects">
+      <h2>Projects</h2>
+      <div class="page" v-for="(project, index) in projects" :key="index">
+        <h3><nuxt-link :to="`/projects/${project.slug}`" v-html="project.title.rendered"></nuxt-link></h3>
+      </div>
+    </div>
+
     <div class="menus mt-8">
       <h2>Menus</h2>
       <div class="page" v-for="(menu, index) in menus" :key="index">
@@ -51,7 +58,7 @@
 <script>
 export default {
   async asyncData({ app }) {
-    // console.log(app.$wp)
+    console.log(app.$wp)
     const menus = await app.$wp.menus()
     const posts = await app.$wp.posts()
     const pages = await app.$wp.pages()
@@ -60,7 +67,7 @@ export default {
     const comments = await app.$wp.comments()
     const taxonomies = await app.$wp.taxonomies()
     const postTypes = await app.$wp.postTypes()
-    const projects = await app.$wp.posts('projects')
+    const projects = await app.$wp.projects()
 
     const mainMenu = await app.$wp.menu('main-navigation')
     return {
