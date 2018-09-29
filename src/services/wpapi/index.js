@@ -1,14 +1,7 @@
 import axios from 'axios'
-import RESOURCES from './api-resources'
+import Resources from './api-resources'
 
 const DEFAULTS = {
-  siteId: '',
-
-  siteUrl: '',
-  // WordPress API endpoint.
-  endpoint: '',
-
-  // Default namespace.
   namespace: 'wp/v2'
 }
 
@@ -20,25 +13,7 @@ export default class WpApi {
     /**
      * Set up predefined resources methods.
      */
-    RESOURCES.forEach(({ collectionName, singleName }) => {
-      this[collectionName] = async () => {
-        const { data } = await this.axios.get(`${collectionName}`)
-        return data
-      }
-
-      if (singleName === 'menu') {
-        this[singleName] = async slug => {
-          const { data } = await this.axios.get(`${collectionName}/${slug}`)
-          return data
-        }
-      } else {
-        this[singleName] = async slug => {
-          const { data } = await this.axios.get(`${collectionName}/?slug=${slug}`)
-          return data[0]
-        }
-      }
-    })
-
+    this._createDefaultResourceRoutes(Resources)
     this._createCustomPostRoutes()
   }
 
@@ -57,9 +32,18 @@ export default class WpApi {
    */
   _createBaseUrl() {
     return `${this.options.wpSiteUrl}/wp-json/wp/v2/`
-    // const namespace = this.options.namespace
-    // const endpoint = this.options.endpoint.replace(namespace, '')
-    // return endpoint
+  }
+
+  /**
+   * Generate config for axios request
+   */
+  setConfig(options) {
+    const requestConfig = {
+      params: {
+        ...options
+      }
+    }
+    return requestConfig
   }
 
   /**
@@ -68,24 +52,6 @@ export default class WpApi {
   namespace(namespace) {
     this.options.namespace = namespace
     return this
-  }
-
-  async posts(postType = 'posts') {
-    const { data } = await this.axios.get(`${postType}`)
-    return data
-  }
-
-  async getPosts(postType = 'posts', options) {
-    const params = {
-      ...options
-    }
-    const { data } = await this.axios.get(`${postType}`, { params })
-    return data
-  }
-
-  async post(slug, postType = 'posts') {
-    const { data } = await this.axios.get(`${postType}`)
-    return data[0]
   }
 
   async postTypes() {
@@ -104,18 +70,39 @@ export default class WpApi {
     return { name, description, url, home, gmt_offset, timezone_string }
   }
 
+  async _createDefaultResourceRoutes(Resources) {
+    Resources.forEach(({ collectionName, singleName }) => {
+      this[collectionName] = async options => {
+        const { data } = await this.axios.get(`${collectionName}`, this.setConfig(options))
+        return data
+      }
+
+      if (singleName === 'menu') {
+        this[singleName] = async slug => {
+          const { data } = await this.axios.get(`${collectionName}/${slug}`)
+          return data
+        }
+      } else {
+        this[singleName] = async slug => {
+          const { data } = await this.axios.get(`${collectionName}/?slug=${slug}&_embed`)
+          return data[0]
+        }
+      }
+    })
+  }
+
   async _createCustomPostRoutes() {
     const PostTypes = await this.postTypes()
 
     Object.entries(PostTypes).forEach(([key, postObject]) => {
       const { rest_base } = postObject
-      this[rest_base] = async () => {
-        const { data } = await this.axios.get(`${rest_base}`)
+      this[rest_base] = async options => {
+        const { data } = await this.axios.get(`${rest_base}`, this.setConfig(options))
         return data
       }
 
       this[`${key}`] = async slug => {
-        const { data } = await this.axios.get(`${rest_base}/?slug=${slug}`)
+        const { data } = await this.axios.get(`${rest_base}/?slug=${slug}&_embed`)
         return data[0]
       }
     })

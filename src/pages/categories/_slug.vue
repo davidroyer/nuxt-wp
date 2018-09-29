@@ -15,9 +15,7 @@
 export default {
   async asyncData({ app, store, params }) {
     const category = await app.$wp.category(params.slug)
-    const posts = await app.$wp.getPosts('posts', {
-      categories: category.id
-    })
+    const posts = await app.$wp.posts({ categories: category.id })
     return {
       category,
       posts

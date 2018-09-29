@@ -16,7 +16,7 @@ export default {
     if (payload) return { posts: payload }
     else {
       let postType = params.rest_base
-      let posts = await app.$wp.posts(postType)
+      let posts = await app.$wp[postType]()
       return {
         posts
       }

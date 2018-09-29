@@ -3,8 +3,8 @@
     <v-intro :tag="1" text="Projects">
     </v-intro>
     <div class="posts">
-      <div class="post" v-for="(post, index) in posts" :key="index">
-        <h3><nuxt-link :to="`/projects/${post.slug}`" v-html="post.title.rendered"></nuxt-link></h3>
+      <div class="post" v-for="(project, index) in projects" :key="index">
+        <h3><nuxt-link :to="`/projects/${project.slug}`" v-html="project.title.rendered"></nuxt-link></h3>
       </div>
     </div>
   </v-wrapper>
@@ -13,9 +13,9 @@
 <script>
 export default {
   async asyncData({ app, store, params }) {
-    const posts = await app.$wp.posts('projects')
+    const projects = await app.$wp.projects()
     return {
-      posts
+      projects
     }
   },
   head() {
